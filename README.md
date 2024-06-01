@@ -1,5 +1,5 @@
-### TicTacToe Coding Exercise
-## Problems
+## TicTacToe Coding Exercise
+
 ### Problem 1
 We have started a basic game of Tic-Tac-Toe as outlined [here](https://en.wikipedia.org/wiki/Tic-tac-toe) but we don't have anyone good enough to code to finish it! 
 - Please implement a complete basic game of Tic-Tac-Toe
