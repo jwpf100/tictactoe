@@ -1,7 +1,4 @@
-
-# Tic-Tac-Toe
-The below problems are to allow us a glimpse into your problem solving ability, style and current skill set. Please do problem 1, and optionally problem 2 or 3 depending on where you are most comfortable. We expect this test to take 2-3 hours, if you find yourself spending more than this do not aim to solve all 3 problems! We will not be judging based on number of problems completed only the style and thought process.
-
+### TicTacToe Coding Exercise
 ## Problems
 ### Problem 1
 We have started a basic game of Tic-Tac-Toe as outlined [here](https://en.wikipedia.org/wiki/Tic-tac-toe) but we don't have anyone good enough to code to finish it! 
@@ -21,17 +18,3 @@ We want to store game results in a database.
 - create a simple backend server (using a simple generator provided by your IDE is fine)
 - use any SQL/noSQL database to store the results
 - return simple stats back to the front-end: number of win/losses for each player.
-
-Simplification for the task:
-- do not use database migration tools, just an SQL or other script to create tables is fine
-- add comments about what you were thinking about but didn’t implement because of restrictions
-- host the project on your local machine, optional hosting in a public place is fine
-- optionally create a Dockerfile to build both back-end and front-end. Do not create any deployment scripts, if it's not necessary.
-- optional tests are welcome
-
-
-## Quickstart
-- Make sure you have **node** installed
-- `cd client`
-- `npm i`
-- `npm start`
