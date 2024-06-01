@@ -1,16 +1,19 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, FormEvent, useState } from 'react'
+import { range } from 'lodash'
 import { XorO } from './types'
 
 export const Main = () => {
-  const initialBoard: (XorO | undefined)[][] = [
-    [undefined, undefined, undefined],
-    [undefined, undefined, undefined],
-    [undefined, undefined, undefined]
-  ]
-  const players: XorO[] = ['X', 'O']
-  const [board, setBoard] = useState<(XorO | undefined)[][]>(initialBoard)
+  const createNewBoardArray = (boardSize: number) =>
+    Array.from({ length: boardSize }, () => {
+      return Array.from({ length: boardSize }, () => undefined)
+    })
+  const [board, setBoard] = useState<(XorO | undefined)[][]>(
+    createNewBoardArray(3)
+  )
   const [currentPlayer, setPlayer] = useState<XorO>('X')
   const [winner, setWinner] = useState<XorO | null>(null)
+  const [gameSize, setGameSize] = useState<number>(3)
+  const players: XorO[] = ['X', 'O']
 
   // Winning options
   const checkGroup = (group: (XorO | undefined)[], player: XorO) => {
@@ -68,12 +71,36 @@ export const Main = () => {
     setBoard(newBoard)
     setPlayer(currentPlayer === 'X' ? 'O' : 'X')
   }
-  
+
   const handleNewGameClick = () => {
     setWinner(null)
-    setBoard(initialBoard)
+    setBoard(createNewBoardArray(gameSize))
   }
 
+  const handleGameSizeOnChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const gameSizeValue: number = Number(event.target.value)
+    setGameSize(gameSizeValue)
+    setBoard(createNewBoardArray(gameSizeValue))
+  }
+
+  const BoardSizeSelectComponent = () => {
+    return (
+      <div className='flex flex-row items-center gap-10'>
+        <label htmlFor='quantity' className='mr-2'>
+          Change Board Size (Will reset game):
+        </label>
+        <select
+          id='quantity'
+          className='bg-white border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500'
+          onChange={handleGameSizeOnChange}
+        >
+          {range(3, 15 + 1).map((number) => {
+            return <option value={number}>{number}</option>
+          })}
+        </select>
+      </div>
+    )
+  }
   return (
     <div className='flex flex-col mt-10 items-center gap-10'>
       <div className='font-bold text-2xl'>Tic Tac Toe</div>
@@ -106,6 +133,7 @@ export const Main = () => {
           </div>
         ))}
       </div>
+      <BoardSizeSelectComponent />
     </div>
   )
 }
