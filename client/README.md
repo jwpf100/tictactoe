@@ -1,3 +1,5 @@
-## Run client
+## Install dependencies
+`npm i`
 
-In client directory run `npm run start` and go to `http://localhost:3001/`
+## Run client
+`npm run start` and go to `http://localhost:3001/`

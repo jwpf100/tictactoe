@@ -18,16 +18,27 @@ export const Main = () => {
   const [winner, setWinner] = useState<XorO | null>(null)
   const [gameSize, setGameSize] = useState<number>(3)
   const [matchStats, setMatchStats] = useState<IMatchStats | undefined>()
+  console.log("🚀 ~ Main ~ matchStats:", matchStats)
 
   // GAME STATS
   const getGameStats = () => {
     return axios.get(`http://localhost:3000/stats`)
+    .then(response => response)
+    .catch(error => {
+      console.log('Error getting game stats from api', error)
+      return error
+    })
   }
 
   const postGameStats = (player: XorO) => {
     return axios.post(`http://localhost:3000/games`, {
       player,
       result: 'win'
+    })
+    .then(response => response)
+    .catch(error => {
+      console.log('Error posting game stats to api', error)
+      return error
     })
   }
 
@@ -129,6 +140,7 @@ export const Main = () => {
 
   const MatchStatsDisplayComponent = () => {
     if(matchStats) {
+      console.log("🚀 ~ MatchStatsDisplayComponent ~ matchStats:", matchStats)
       return (
         <div className='flex flex-row items-center gap-10'>
           {players.map(player => {
@@ -166,7 +178,7 @@ export const Main = () => {
     let ignore = false;
     getGameStats().then(result => {
       if (!ignore && get(result, 'data')) {
-        setMatchStats(result.data)
+        setMatchStats(get(result, 'data', []))
       }
     })
     return () => {
